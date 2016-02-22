@@ -56,6 +56,12 @@ exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
   path => '/usr/local/bin',
   creates => '/etc/motd',
 }
+
+host { 'testing.puppetlabs.vm':
+  ensure       => 'present',
+  host_aliases => ['testing'],
+  ip           => '127.0.0.1',
+}
   
   notify { "P is for puppet, that's good enough for me... ${::hostname}": }
 }
