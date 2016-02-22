@@ -42,5 +42,15 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
+  
+file { '/etc/motd':
+  ensure  => file,
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0644',
+  content => "To ininity and beyond! Titles and Namevars are different but important.\n",
+}
+
+  
   notify { "P is for puppet, that's good enough for me... ${::hostname}": }
 }
