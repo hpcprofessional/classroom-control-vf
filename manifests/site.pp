@@ -41,21 +41,21 @@ include users
 # will be included in every node's catalog, *in addition* to any classes
 # specified in the console for that node.
 
-node 'hpcprofessional.puppetlabs.vm' {
-  notify { "This is my node. There are many like it, but this one is mine!": }
-}
+#node 'hpcprofessional.puppetlabs.vm' {
+#  notify { "This is my node. There are many like it, but this one is mine!": }
+#}
 
-node /\.puppetlabs\.vm/ {
-  notify { "Welcome puppetlabs.vm system. You're good enough, you're smart enough, and doggonnit, people like you": }
-}
+#node /\.puppetlabs\.vm/ {
+#  notify { "Welcome puppetlabs.vm system. You're good enough, you're smart enough, and doggonnit, people like you": }
+#}
 
 node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
   
-  include users
-  include skeleton
+#  include users
+#  include skeleton
   
   notify { "P is for puppet, that's good enough for me... ${::hostname}": }
 }
