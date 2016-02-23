@@ -10,6 +10,7 @@ class memcached {
     path => '/etc/sysconfig/memcached',
     require => Package['memcached'],
     #notify => Service['memcached'],
+    source => 'puppet:///modules/memcached/memcached',
   }
   
   service { 'memcached':
