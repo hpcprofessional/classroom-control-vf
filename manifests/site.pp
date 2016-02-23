@@ -38,6 +38,10 @@ ini_setting { 'random ordering':
 # will be included in every node's catalog, *in addition* to any classes
 # specified in the console for that node.
 
+node 'hpcprofessional.puppetlabs.vm' {
+  notify { "This is my node. There are many like it, but this one is mine!": }
+}
+
 node /\.puppetlabs\.vm/ {
   notify { "Welcome puppetlabs.vm system. You're good enough, you're smart enough, and doggonnit, people like you": }
 }
