@@ -28,8 +28,9 @@ ini_setting { 'random ordering':
   value   => 'title-hash',
 }
 
-notify { "This is a global notification": }
-include users
+#Part of Classification Demo.
+#notify { "This is a global notification": }
+#include users
 
 # DEFAULT NODE
 # Node definitions in this file are merged with node data from the console. See
