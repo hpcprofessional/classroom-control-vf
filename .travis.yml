@@ -6,3 +6,6 @@ env:
 rvm:
   - 2.0
 script: puppet parser validate .
+notifications:
+  email: false
+  
