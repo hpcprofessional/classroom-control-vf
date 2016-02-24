@@ -59,10 +59,14 @@ node default {
 #  include skeleton
 include nginx
   
-  if $::is_virtual {
-    $hypervisor = capitalize($::virtual)
-    notify { "My hypervisor is: ${hypervisor}\n": }
-    notify { "I am running a/an ${capitalize($::osfamily)} derivative": }
+  $admin = 'paul'
+  user { $admin:
+    ensure => present,
   }
-  notify { "P is for puppet, that's good enough for me... ${::hostname}": }
+
+  class { 'aliases':
+    admin   => $admin,
+    require => User[$admin],
+  }
+
 }
