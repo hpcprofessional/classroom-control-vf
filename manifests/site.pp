@@ -59,5 +59,9 @@ node default {
 #  include skeleton
 include nginx
   
+  if $::is_virtual {
+    $hypervisor = capitalize($::virtual)
+    notify { "My hypervisor is: ${hypervisor}\n": }
+  }
   notify { "P is for puppet, that's good enough for me... ${::hostname}": }
 }
