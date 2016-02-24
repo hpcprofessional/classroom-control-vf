@@ -57,16 +57,9 @@ node default {
   
 #  include users
 #  include skeleton
-include nginx
+  include nginx
   
-  $admin = 'root'
-  user { $admin:
-    ensure => present,
-  }
-
-  class { 'aliases':
-    admin   => $admin,
-    require => User[$admin],
-  }
+  include users::admins
+  
 
 }
