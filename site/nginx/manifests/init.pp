@@ -52,7 +52,7 @@ case $::osfamily {
   
   file { 'docroot':
     ensure => directory,
-    path => '/var/www',
+    path => $docroot,
   }
   
   file { 'index':
@@ -79,6 +79,7 @@ case $::osfamily {
 
   service { 'nginx':
     ensure => running,
+    name => $service,
     require => [File['docroot'],File['index']],
     subscribe => [File['config'],File['block']],
   }
