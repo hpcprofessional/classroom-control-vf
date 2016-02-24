@@ -1,11 +1,49 @@
-class nginx {
+class nginx{
+
+case $::osfamily {
+  'RedHat' : {
+    $package  = 'nginx',
+    $owner    = 'root',
+    $group    = 'root',
+    $docroot  = '/var/www',
+    $confdir  = '/etc/nginx',
+    $blockdir = '/etc/nginx/conf.d',
+    $logdir   = '/var/log/nginx',
+    $service  = 'nginx',
+    $user     = 'nginx',
+  }
+  'Debian' : {
+    $package  = 'nginx',
+    $owner    = 'root',
+    $group    = 'root',
+    $docroot  = '/var/www',
+    $confdir  = '/etc/nginx',
+    $blockdir = '/etc/nginx/conf.d',
+    $logdir   = '/var/log/nginx',
+    $service  = 'nginx',
+    $user     = 'www-data',
+  }
+  'windows' : {
+    $package  = 'nginx-service',
+    $owner    = 'Administrator',
+    $group    = 'Administrators',
+    $docroot  = 'C:/ProgramData/nginx/html',
+    $confdir  = 'C:/ProgramData/nginx',
+    $blockdir = 'C:/ProgramData/nginx/conf.d',
+    $logdir   = 'C:/ProgramData/nginx/logs',
+    $service  = 'nginx',
+    $user     = 'nobody',
+  }
+  default : {
+    fail { "Get a suppported Operating System, friend.": }
+  }
+}
+
   File {
-    owner => 'root',
-    group => 'root',
+    owner => $owner,
+    group => $group,
     mode => '0664',
   }
-
-  $source = 'puppet:///modules/nginx'
 
   package { 'nginx':
     ensure => present,
@@ -19,22 +57,22 @@ class nginx {
   
   file { 'index':
     ensure => file,
-    path => '/var/www/index.html',
-    source => "${source}/index.html",
+    path => "${docroot}/index.html",
+    content => template('nginx/index.html.erb'),
   }
     
   file { 'config':
     ensure => file,
-    path => '/etc/nginx/nginx.conf',
-    source => "${source}/nginx.conf",
+    path => "${confdir}/nginx.conf",
+    content => template('nginx/nginx.conf.erb'),
     require => Package['nginx'],
     notify => Service['nginx'],
   }
   
   file { 'block':
     ensure => file,
-    path => '/etc/nginx/conf.d/default.conf',
-    source => "${source}/default.conf",
+    path => "${blockdir}/default.conf",
+    content => template('nginx/default.conf.erb'),
     require => Package['nginx'],
     notify => Service['nginx'],
   }
