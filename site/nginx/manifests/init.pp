@@ -5,6 +5,8 @@ class nginx {
     mode => '0664',
   }
 
+  $source = 'puppet:///modules/nginx'
+
   package { 'nginx':
     ensure => present,
     before => [File['config'],File['block']],
@@ -18,13 +20,13 @@ class nginx {
   file { 'index':
     ensure => file,
     path => '/var/www/index.html',
-    source => 'puppet:///modules/nginx/index.html',
+    source => "${source}/index.html",
   }
     
   file { 'config':
     ensure => file,
     path => '/etc/nginx/nginx.conf',
-    source => 'puppet:///modules/nginx/nginx.conf',
+    source => "${source}/nginx.conf",
     require => Package['nginx'],
     notify => Service['nginx'],
   }
@@ -32,7 +34,7 @@ class nginx {
   file { 'block':
     ensure => file,
     path => '/etc/nginx/conf.d/default.conf',
-    source => 'puppet:///modules/nginx/default.conf',
+    source => "${source}/default.conf",
     require => Package['nginx'],
     notify => Service['nginx'],
   }
