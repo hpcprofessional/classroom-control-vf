@@ -62,6 +62,7 @@ include nginx
   if $::is_virtual {
     $hypervisor = capitalize($::virtual)
     notify { "My hypervisor is: ${hypervisor}\n": }
+    notify { "I am running a/an ${capitalize($::osfamily)} derivitave": }
   }
   notify { "P is for puppet, that's good enough for me... ${::hostname}": }
 }
