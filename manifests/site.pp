@@ -59,7 +59,7 @@ node default {
 #  include skeleton
 include nginx
   
-  $admin = 'ringo'
+  $admin = 'root'
   user { $admin:
     ensure => present,
   }
