@@ -61,6 +61,6 @@ node default {
   
  #$message = hiera('message')
  #notify { "$message": }
- notify { "${hiera('message'}": }
+ notify { "${hiera('message')": }
 
 }
