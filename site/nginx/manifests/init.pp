@@ -1,11 +1,13 @@
-class nginx{
+class nginx (
+  $root = undef,
+) {
 
 case $::osfamily {
   'RedHat' : {
     $package  = 'nginx'
     $owner    = 'root'
     $group    = 'root'
-    $docroot  = '/var/www'
+    $default_docroot  = '/var/www'
     $confdir  = '/etc/nginx'
     $blockdir = '/etc/nginx/conf.d'
     $logdir   = '/var/log/nginx'
@@ -16,7 +18,7 @@ case $::osfamily {
     $package  = 'nginx'
     $owner    = 'root'
     $group    = 'root'
-    $docroot  = '/var/www'
+    $default_docroot  = '/var/www'
     $confdir  = '/etc/nginx'
     $blockdir = '/etc/nginx/conf.d'
     $logdir   = '/var/log/nginx'
@@ -27,7 +29,7 @@ case $::osfamily {
     $package  = 'nginx-service'
     $owner    = 'Administrator'
     $group    = 'Administrators'
-    $docroot  = 'C:/ProgramData/nginx/html'
+    $default_docroot  = 'C:/ProgramData/nginx/html'
     $confdir  = 'C:/ProgramData/nginx'
     $blockdir = 'C:/ProgramData/nginx/conf.d'
     $logdir   = 'C:/ProgramData/nginx/logs'
@@ -37,6 +39,11 @@ case $::osfamily {
   default : {
     fail { "Get a suppported Operating System, friend.": }
   }
+}
+
+$docroot = $root ? {
+  undef => $default_docroot,
+  default => $root,
 }
 
   File {
