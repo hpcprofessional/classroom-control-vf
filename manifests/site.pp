@@ -57,7 +57,7 @@ node default {
   
 #  include users
 #  include skeleton
-  include nginx
+#  include nginx
   
  #$message = hiera('message')
  #notify { "$message": }
