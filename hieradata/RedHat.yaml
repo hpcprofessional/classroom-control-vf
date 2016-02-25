@@ -1,2 +1,2 @@
 ---
-nginx::vhost: /var/www/training
+nginx::docroot: /var/www/training
