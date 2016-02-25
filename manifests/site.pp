@@ -59,7 +59,8 @@ node default {
 #  include skeleton
   include nginx
   
-  include users::admins
-  
+ #$message = hiera('message')
+ #notify { "$message": }
+ notify { "${hiera('message'}": }
 
 }
