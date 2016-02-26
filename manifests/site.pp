@@ -51,17 +51,7 @@ ini_setting { 'random ordering':
 #}
 
 node default {
-  # This is where you can declare classes for all nodes.
-  # Example:
-  #   class { 'my_class': }
-  
-#  include users
-#  include skeleton
-# include nginx
 
-  
- #$message = hiera('message')
- #notify { "$message": }
- notify { "${hiera('nginx::docroot')}": }
+  include profile::bloggingplatform
 
 }
