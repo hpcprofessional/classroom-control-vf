@@ -46,10 +46,11 @@ node default {
   #include examples::fundamentals
   
   file { 'motd':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    path    => '/etc/motd',
     content => "Think before you type!\n",
   }
 }
