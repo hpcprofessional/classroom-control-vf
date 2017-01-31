@@ -45,12 +45,17 @@ node default {
   include role::classroom
   #include examples::fundamentals
   
-  file { 'motd':
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    path    => '/etc/motd',
-    content => "Think before you type!\n",
+  #file { 'motd':
+  #  ensure  => file,
+  #  owner   => 'root',
+  #  group   => 'root',
+  #  mode    => '0644',
+  #  path    => '/etc/motd',
+  #  content => "Think before you type!\n",
+  #}
+  
+  exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd"
+    creates => '/etc/motd',
+    path    => '/bin:/usr/bin:/usr/local/bin'
   }
 }
