@@ -1,40 +1,37 @@
 class nginx {
-  package { 'nginx':
+  $docroot  = '/var/www'
+  $confdir  = '/etc/nginx'
+  $blockdir = '/etc/nginx/conf.d'
+  $package  = 'nginx'
+  
+  package { $package:
     ensure => present,
     before => [ File['nginx.conf'], File['default.conf'] ],
   }
   
-  file { 'docroot':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    path   => '/var/www',
-  }
-  
-  file { 'index.html':
+  File {
     ensure => file,
     owner  => 'root',
     group  => 'root',
     mode   => '0664',
-    path   => '/var/www/index.html',
+  }
+  
+  file { $docroot:
+    ensure => directory,
+  }
+  
+  file { 'index.html':
+    path   => "${docroot}/index.html",
     source => 'puppet:///modules/nginx/index.html',
   }
   
   file { 'nginx.conf':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0664',
-    path   => '/etc/nginx/nginx.conf',
+    path   => "${confdir}/nginx.conf",
     source => 'puppet:///modules/nginx/nginx.conf',
   }
   
   file { 'default.conf':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0664',
-    path   => '/etc/nginx/conf.d/default.conf',
+    path   => "${blockdir}/default.conf",
     source => 'puppet:///modules/nginx/default.conf',
   }
   
