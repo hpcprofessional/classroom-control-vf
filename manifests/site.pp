@@ -49,7 +49,7 @@ node default {
   include memcached
   
   # Exercise 13.2
-  if $::virtual == 'docker' {
+  if $::virtual != 'docker' {
     notify { "This machine is a ${::virtual} container.": }
   }
   
