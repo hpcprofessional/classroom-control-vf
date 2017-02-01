@@ -15,7 +15,7 @@ class memcached {
   
   service { 'memcached':
     ensure => running,
-    enable => true
+    enable => true,
     subscribe => File['memcached'],
   }
 }
