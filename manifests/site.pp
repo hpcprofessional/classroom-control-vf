@@ -44,4 +44,7 @@ node default {
   
   # Exercise 9.3
   include skeleton
+  
+  # Exercise 11.1
+  include memcached
 }
